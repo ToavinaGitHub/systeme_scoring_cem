@@ -3,8 +3,14 @@
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'css/modifie_client.css' %}">
+<link rel="stylesheet" href="{% static 'css/notification.css' %}">
 
 <div class="container">
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="message {{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
     <h1>Modifier les Informations du Client</h1>
     <form method="post">
         {% csrf_token %}

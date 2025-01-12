@@ -111,9 +111,19 @@ def ajouter_client(request):
             messages.success(request, "Le client a été ajouté avec succès.")
             return redirect('gestionnaireclients')
         except ValidationError as e:
+            errors = e.message_dict
+            print(errors)
             messages.error(request, f"Erreur lors de l'ajout du client : {e}")
-
-    return render(request, 'gestionnaire_demande/gestionnaire_client.html')
+            return render(
+                request, 
+                'gestionnaire_demande/gestionnaire_clients.html', 
+                {
+                    'errors': errors, 
+                    'client_data': client_data,
+                    'clients': Client.objects.all(),
+                }
+            )
+    return render(request, 'gestionnaire_demande/gestionnaire_clients.html')
 
 @login_required
 @user_passes_test(is_gestionnaire_demande)
@@ -152,6 +162,7 @@ def modifie_client(request, client_id):
             # Validation et sauvegarde
             client.full_clean()
             client.save()
+            print("Client modifié avec succès.")
             messages.success(request, "Les informations du client ont été mises à jour avec succès.")
             return redirect('gestionnaireclients')
         except ValidationError as e:

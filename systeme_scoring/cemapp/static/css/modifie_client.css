@@ -97,3 +97,21 @@ textarea {
         font-size: 18px;
     }
 }
+
+.messages {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+    width: 65%;
+    color: #e50005;
+    font-size: 14px;
+    text-align: center;
+}
+
+.messages li.success {
+    color: #4CAF50;
+}
+
+.messages li.info {
+    color: #2196F3;
+}

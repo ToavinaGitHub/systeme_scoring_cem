@@ -1,0 +1,70 @@
+/* Container principal */
+.messages-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Liste des messages */
+.messages {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Styles des messages */
+.message {
+    font-size: 16px;
+    margin: 10px 0;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.3s ease;
+}
+
+/* Types de messages */
+.message.success {
+    background-color: #4CAF50; /* Vert pour le succès */
+}
+
+.message.error {
+    background-color: #F44336; /* Rouge pour l'erreur */
+}
+
+.message.info {
+    background-color: #2196F3; /* Bleu pour l'info */
+}
+
+.message.warning {
+    background-color: #FF9800; /* Orange pour les avertissements */
+}
+
+/* Animation pour faire apparaître */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animation pour chaque message */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

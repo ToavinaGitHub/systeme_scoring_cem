@@ -4,7 +4,15 @@
 
 <link rel="stylesheet" href="{% static 'css/gestionnaire_clients.css' %}">
 <link rel="stylesheet" href="{% static 'css/formulaire_client.css' %}">
+<link rel="stylesheet" href="{% static 'css/notification.css' %}">
 
+<ul class="messages">
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <li class="message {{ message.tags }}">{{ message }}</li>
+        {% endif %}
+    {% endfor %}
+</ul>
 
 <div class="action-bar">
     <button id="addClientButton" onclick="window.location.href='#'">Ajouter un client</button>
@@ -43,12 +51,19 @@
     <div class="modal-content">
         <span class="close" onclick="closeModal('clientModal')">&times;</span>
         <h2>Ajouter un Client</h2>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="message {{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %} 
         <form method="post" action="{% url 'ajoutclient' %}">
             {% csrf_token %}
     
             <h3>Informations Personnelles</h3>
             <label for="nom">Nom:</label>
-            <input type="text" id="nom" name="nom" required>
+            <input type="text" id="nom" name="nom" value="{{ form.nom }}" required>
     
             <label for="prenom">Prénom:</label>
             <input type="text" id="prenom" name="prenom" required>
@@ -128,11 +143,30 @@
     
             <label for="situation_bancaire">Situation Bancaire:</label>
             <textarea id="situation_bancaire" name="situation_bancaire"></textarea>
-    
             <button type="submit" class="btn-save">Enregistrer</button>
         </form>
-    </div>    
+    </div>   
+    
 </div>
+
+<input type="hidden" id="openModal" value="{% if messages %}true{% else %}false{% endif %}">
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const openModal = document.getElementById("openModal").value;
+        if (openModal === "true") {
+            document.getElementById("clientModal").style.display = "block";
+        }
+    });
+
+    function openModal(modalId) {
+        document.getElementById(modalId).style.display = "block";
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+    }
+</script>
 
 
 <script>
