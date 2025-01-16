@@ -3,9 +3,17 @@
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'css/gestionnaire_demandes.css' %}">
+<link rel="stylesheet" href="{% static 'css/notification.css' %}">
 
 <div class="container">
     <h2>Gestion des Demandes</h2>
+    <ul class="messages">
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <li class="message {{ message.tags }}">{{ message }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
 
     <div class="text-right mb-3">
         <a href="{% url 'nouvelledemande' %}" class="btn btn-success">Nouvelle Demande</a>

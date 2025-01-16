@@ -59,11 +59,13 @@
         </div>
 
         {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                        <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
+            <ul class="messages">
+                {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                        <li class="message {{ message.tags }}">{{ message }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
         {% endif %}
 
         <!-- Boutons d'action -->
